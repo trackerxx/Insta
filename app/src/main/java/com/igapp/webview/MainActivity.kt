@@ -1,7 +1,6 @@
 package com.igapp.webview
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.webkit.CookieManager
@@ -54,18 +53,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyStatusBarColor() {
-        val isDarkMode = (resources.configuration.uiMode and
-            Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        val barColor = Color.parseColor("#0C1014")
 
-        if (isDarkMode) {
-            // Instagram's dark mode uses true black
-            window.statusBarColor = Color.BLACK
-            WindowCompat.getInsetsController(window, window.decorView)
-                .isAppearanceLightStatusBars = false
-        } else {
-            window.statusBarColor = Color.WHITE
-            WindowCompat.getInsetsController(window, window.decorView)
-                .isAppearanceLightStatusBars = true
+        window.statusBarColor = barColor
+        window.navigationBarColor = barColor
+
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightStatusBars = false
+            isAppearanceLightNavigationBars = false
         }
     }
 
